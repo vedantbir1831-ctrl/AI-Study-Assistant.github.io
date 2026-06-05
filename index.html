@@ -7,551 +7,110 @@
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --bg: #0a0a0f;
-    --surface: #111118;
-    --surface2: #1a1a26;
-    --border: rgba(120,100,255,0.18);
-    --border2: rgba(120,100,255,0.35);
-    --accent: #7c5cfc;
-    --accent2: #a78bfa;
-    --accent3: #34d399;
-    --text: #f0eeff;
-    --muted: #8b82b0;
-    --danger: #f87171;
-    --font: 'Sora', sans-serif;
-    --mono: 'Space Mono', monospace;
+    --bg: #0a0a0f; --surface: #111118; --surface2: #1a1a26;
+    --border: rgba(120,100,255,0.18); --border2: rgba(120,100,255,0.35);
+    --accent: #7c5cfc; --accent2: #a78bfa; --accent3: #34d399;
+    --text: #f0eeff; --muted: #8b82b0; --danger: #f87171;
+    --font: 'Sora', sans-serif; --mono: 'Space Mono', monospace;
   }
-
-  body {
-    font-family: var(--font);
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
-  }
-
-  /* NAV */
-  nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 2rem;
-    border-bottom: 1px solid var(--border);
-    background: rgba(10,10,15,0.9);
-    backdrop-filter: blur(12px);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .logo {
-    font-size: 1.3rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, #7c5cfc, #a78bfa, #34d399);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    letter-spacing: -0.5px;
-  }
-  .nav-tabs {
-    display: flex;
-    gap: 0.25rem;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 4px;
-  }
-  .tab-btn {
-    background: none;
-    border: none;
-    color: var(--muted);
-    font-family: var(--font);
-    font-size: 0.82rem;
-    font-weight: 500;
-    padding: 0.45rem 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s;
-    white-space: nowrap;
-  }
-  .tab-btn.active {
-    background: var(--accent);
-    color: #fff;
-  }
+  body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
+  nav { display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; border-bottom: 1px solid var(--border); background: rgba(10,10,15,0.9); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100; }
+  .logo { font-size: 1.3rem; font-weight: 700; background: linear-gradient(135deg,#7c5cfc,#a78bfa,#34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -0.5px; }
+  .nav-tabs { display: flex; gap: 0.25rem; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 4px; }
+  .tab-btn { background: none; border: none; color: var(--muted); font-family: var(--font); font-size: 0.82rem; font-weight: 500; padding: 0.45rem 1rem; border-radius: 8px; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+  .tab-btn.active { background: var(--accent); color: #fff; }
   .tab-btn:hover:not(.active) { color: var(--text); background: var(--surface2); }
-
-  /* HERO */
-  .hero {
-    text-align: center;
-    padding: 3.5rem 2rem 2.5rem;
-    position: relative;
-  }
-  .hero-glow {
-    position: absolute;
-    top: 0; left: 50%;
-    transform: translateX(-50%);
-    width: 600px; height: 300px;
-    background: radial-gradient(ellipse at center, rgba(124,92,252,0.15) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero h1 {
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
-    font-weight: 700;
-    letter-spacing: -1px;
-    line-height: 1.15;
-    margin-bottom: 0.75rem;
-  }
-  .hero h1 span {
-    background: linear-gradient(135deg, #7c5cfc, #34d399);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+  .hero { text-align: center; padding: 3.5rem 2rem 2.5rem; position: relative; }
+  .hero-glow { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 600px; height: 300px; background: radial-gradient(ellipse at center, rgba(124,92,252,0.15) 0%, transparent 70%); pointer-events: none; }
+  .hero h1 { font-size: clamp(1.8rem,4vw,2.8rem); font-weight: 700; letter-spacing: -1px; line-height: 1.15; margin-bottom: 0.75rem; }
+  .hero h1 span { background: linear-gradient(135deg,#7c5cfc,#34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
   .hero p { color: var(--muted); font-size: 1rem; max-width: 480px; margin: 0 auto; line-height: 1.6; }
-
-  /* FEATURE PILLS */
-  .pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    justify-content: center;
-    margin-top: 1.25rem;
-  }
-  .pill {
-    font-size: 0.75rem;
-    font-weight: 500;
-    padding: 0.35rem 0.85rem;
-    border-radius: 999px;
-    border: 1px solid var(--border);
-    background: var(--surface);
-    color: var(--muted);
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .pill:hover, .pill.active {
-    border-color: var(--accent);
-    color: var(--accent2);
-    background: rgba(124,92,252,0.12);
-  }
-
-  /* MAIN PANEL */
-  .panel {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    max-width: 860px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 0 1.5rem 2rem;
-  }
-
-  /* CHAT VIEW */
-  .chat-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    flex: 1;
-  }
-  .messages {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    min-height: 260px;
-    max-height: 420px;
-    overflow-y: auto;
-    padding: 1rem;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    scroll-behavior: smooth;
-  }
+  .pills { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-top: 1.25rem; }
+  .pill { font-size: 0.75rem; font-weight: 500; padding: 0.35rem 0.85rem; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--muted); cursor: pointer; transition: all 0.2s; }
+  .pill:hover { border-color: var(--accent); color: var(--accent2); background: rgba(124,92,252,0.12); }
+  .panel { flex: 1; display: flex; flex-direction: column; max-width: 860px; width: 100%; margin: 0 auto; padding: 0 1.5rem 2rem; }
+  .chat-container { display: flex; flex-direction: column; gap: 1rem; flex: 1; }
+  .messages { display: flex; flex-direction: column; gap: 1rem; min-height: 260px; max-height: 420px; overflow-y: auto; padding: 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; scroll-behavior: smooth; }
   .messages::-webkit-scrollbar { width: 4px; }
-  .messages::-webkit-scrollbar-track { background: transparent; }
   .messages::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
-
-  .msg {
-    display: flex;
-    gap: 0.75rem;
-    animation: fadeUp 0.3s ease;
-  }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  .msg { display: flex; gap: 0.75rem; animation: fadeUp 0.3s ease; }
   .msg.user { flex-direction: row-reverse; }
-  .avatar {
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 0.75rem; font-weight: 700;
-    flex-shrink: 0;
-  }
-  .avatar.ai { background: linear-gradient(135deg, #7c5cfc, #34d399); color: #fff; }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+  .avatar { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
+  .avatar.ai { background: linear-gradient(135deg,#7c5cfc,#34d399); color: #fff; }
   .avatar.user { background: var(--surface2); color: var(--accent2); border: 1px solid var(--border2); }
-
-  .bubble {
-    max-width: 78%;
-    padding: 0.75rem 1rem;
-    border-radius: 14px;
-    font-size: 0.88rem;
-    line-height: 1.65;
-  }
-  .msg.ai .bubble {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    color: var(--text);
-    border-bottom-left-radius: 4px;
-  }
-  .msg.user .bubble {
-    background: linear-gradient(135deg, rgba(124,92,252,0.25), rgba(52,211,153,0.15));
-    border: 1px solid var(--border2);
-    color: var(--text);
-    border-bottom-right-radius: 4px;
-  }
-  .bubble pre {
-    background: rgba(0,0,0,0.4);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 0.75rem;
-    overflow-x: auto;
-    font-family: var(--mono);
-    font-size: 0.78rem;
-    margin: 0.5rem 0;
-    white-space: pre-wrap;
-  }
+  .bubble { max-width: 78%; padding: 0.75rem 1rem; border-radius: 14px; font-size: 0.88rem; line-height: 1.65; }
+  .msg.ai .bubble { background: var(--surface2); border: 1px solid var(--border); color: var(--text); border-bottom-left-radius: 4px; }
+  .msg.user .bubble { background: linear-gradient(135deg,rgba(124,92,252,0.25),rgba(52,211,153,0.15)); border: 1px solid var(--border2); color: var(--text); border-bottom-right-radius: 4px; }
+  .bubble pre { background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: 8px; padding: 0.75rem; overflow-x: auto; font-family: var(--mono); font-size: 0.78rem; margin: 0.5rem 0; white-space: pre-wrap; }
   .bubble strong { color: var(--accent2); }
-
-  .typing-indicator {
-    display: flex;
-    gap: 4px;
-    align-items: center;
-    padding: 0.5rem 0;
-  }
-  .dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
-    animation: bounce 1.2s infinite;
-  }
+  .typing-indicator { display: flex; gap: 4px; align-items: center; padding: 0.5rem 0; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: bounce 1.2s infinite; }
   .dot:nth-child(2) { animation-delay: 0.2s; }
   .dot:nth-child(3) { animation-delay: 0.4s; }
-  @keyframes bounce {
-    0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
-    40% { transform: translateY(-6px); opacity: 1; }
-  }
-
-  /* INPUT AREA */
-  .input-area {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 0.75rem;
-    transition: border-color 0.2s;
-  }
+  @keyframes bounce { 0%,80%,100% { transform:translateY(0); opacity:0.4; } 40% { transform:translateY(-6px); opacity:1; } }
+  .input-area { display: flex; flex-direction: column; gap: 0.6rem; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 0.75rem; transition: border-color 0.2s; }
   .input-area:focus-within { border-color: var(--accent); }
-
-  .mode-bar {
-    display: flex;
-    gap: 0.4rem;
-    flex-wrap: wrap;
-  }
-  .mode-chip {
-    font-size: 0.72rem;
-    font-weight: 600;
-    padding: 0.28rem 0.7rem;
-    border-radius: 6px;
-    border: 1px solid var(--border);
-    background: none;
-    color: var(--muted);
-    cursor: pointer;
-    font-family: var(--font);
-    transition: all 0.15s;
-  }
-  .mode-chip.active {
-    background: rgba(124,92,252,0.2);
-    border-color: var(--accent);
-    color: var(--accent2);
-  }
+  .mode-bar { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+  .mode-chip { font-size: 0.72rem; font-weight: 600; padding: 0.28rem 0.7rem; border-radius: 6px; border: 1px solid var(--border); background: none; color: var(--muted); cursor: pointer; font-family: var(--font); transition: all 0.15s; }
+  .mode-chip.active { background: rgba(124,92,252,0.2); border-color: var(--accent); color: var(--accent2); }
   .mode-chip:hover:not(.active) { color: var(--text); border-color: var(--muted); }
-
-  .input-row {
-    display: flex;
-    gap: 0.6rem;
-    align-items: flex-end;
-  }
-  textarea {
-    flex: 1;
-    background: none;
-    border: none;
-    outline: none;
-    color: var(--text);
-    font-family: var(--font);
-    font-size: 0.88rem;
-    resize: none;
-    line-height: 1.5;
-    max-height: 120px;
-    min-height: 40px;
-  }
+  .input-row { display: flex; gap: 0.6rem; align-items: flex-end; }
+  textarea { flex: 1; background: none; border: none; outline: none; color: var(--text); font-family: var(--font); font-size: 0.88rem; resize: none; line-height: 1.5; max-height: 120px; min-height: 40px; }
   textarea::placeholder { color: var(--muted); }
-
-  .send-btn {
-    background: linear-gradient(135deg, #7c5cfc, #5b3fd4);
-    border: none;
-    color: #fff;
-    width: 38px; height: 38px;
-    border-radius: 10px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: all 0.2s;
-    font-size: 1rem;
-  }
-  .send-btn:hover { transform: scale(1.05); background: linear-gradient(135deg, #8b6cff, #6a4fe0); }
-  .send-btn:active { transform: scale(0.97); }
+  .send-btn { background: linear-gradient(135deg,#7c5cfc,#5b3fd4); border: none; color: #fff; width: 38px; height: 38px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; font-size: 1rem; }
+  .send-btn:hover { transform: scale(1.05); }
   .send-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
-
-  /* QUICK PROMPTS */
-  .quick-prompts {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    margin-top: 0.25rem;
-  }
-  .quick-btn {
-    font-size: 0.76rem;
-    padding: 0.4rem 0.8rem;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    background: var(--surface);
-    color: var(--muted);
-    cursor: pointer;
-    font-family: var(--font);
-    transition: all 0.2s;
-    text-align: left;
-  }
-  .quick-btn:hover {
-    border-color: var(--accent);
-    color: var(--text);
-    background: rgba(124,92,252,0.1);
-  }
-
-  /* TOOLS VIEW */
-  .tools-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    margin-top: 1rem;
-  }
-  .tool-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 1.25rem;
-    cursor: pointer;
-    transition: all 0.2s;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  .tool-card:hover {
-    border-color: var(--accent);
-    background: rgba(124,92,252,0.08);
-    transform: translateY(-2px);
-  }
+  .quick-prompts { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.25rem; }
+  .quick-btn { font-size: 0.76rem; padding: 0.4rem 0.8rem; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); color: var(--muted); cursor: pointer; font-family: var(--font); transition: all 0.2s; }
+  .quick-btn:hover { border-color: var(--accent); color: var(--text); background: rgba(124,92,252,0.1); }
+  .tools-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 1rem; margin-top: 1rem; }
+  .tool-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 1.25rem; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; gap: 0.5rem; }
+  .tool-card:hover { border-color: var(--accent); background: rgba(124,92,252,0.08); transform: translateY(-2px); }
   .tool-icon { font-size: 1.5rem; }
   .tool-title { font-weight: 600; font-size: 0.9rem; }
   .tool-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
-
-  /* FLASHCARD VIEW */
-  .flashcard-area {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.25rem;
-    margin-top: 1rem;
-  }
-  .fc-generate {
-    display: flex;
-    gap: 0.75rem;
-    width: 100%;
-  }
-  .fc-input {
-    flex: 1;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 0.65rem 1rem;
-    color: var(--text);
-    font-family: var(--font);
-    font-size: 0.85rem;
-    outline: none;
-    transition: border-color 0.2s;
-  }
+  .flashcard-area { display: flex; flex-direction: column; align-items: center; gap: 1.25rem; margin-top: 1rem; }
+  .fc-generate { display: flex; gap: 0.75rem; width: 100%; }
+  .fc-input { flex: 1; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 0.65rem 1rem; color: var(--text); font-family: var(--font); font-size: 0.85rem; outline: none; transition: border-color 0.2s; }
   .fc-input:focus { border-color: var(--accent); }
-  .fc-btn {
-    background: var(--accent);
-    border: none;
-    color: #fff;
-    font-family: var(--font);
-    font-weight: 600;
-    font-size: 0.82rem;
-    padding: 0 1.2rem;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.2s;
-    white-space: nowrap;
-  }
+  .fc-btn { background: var(--accent); border: none; color: #fff; font-family: var(--font); font-weight: 600; font-size: 0.82rem; padding: 0 1.2rem; border-radius: 12px; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
   .fc-btn:hover { background: #8b6cff; }
   .fc-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-
-  .card-deck {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-  .flashcard {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 1rem 1.25rem;
-    cursor: pointer;
-    transition: all 0.2s;
-    position: relative;
-    overflow: hidden;
-  }
+  .card-deck { width: 100%; display: flex; flex-direction: column; gap: 0.75rem; }
+  .flashcard { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1rem 1.25rem; cursor: pointer; transition: all 0.2s; position: relative; overflow: hidden; }
   .flashcard:hover { border-color: var(--accent); }
   .flashcard.flipped { background: rgba(52,211,153,0.08); border-color: var(--accent3); }
-  .flashcard::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 4px; height: 100%;
-    background: var(--accent);
-    border-radius: 4px 0 0 4px;
-  }
+  .flashcard::before { content:''; position:absolute; top:0; left:0; width:4px; height:100%; background:var(--accent); border-radius:4px 0 0 4px; }
   .flashcard.flipped::before { background: var(--accent3); }
   .fc-q { font-size: 0.88rem; font-weight: 500; margin-bottom: 0.4rem; }
   .fc-a { font-size: 0.82rem; color: var(--accent3); display: none; margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--border); }
   .flashcard.flipped .fc-a { display: block; }
   .fc-hint { font-size: 0.7rem; color: var(--muted); }
-
-  /* SUMMARY VIEW */
-  .summary-area {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin-top: 0.75rem;
-  }
-  .summary-box {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  .summary-label {
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--muted);
-  }
-  textarea.summary-input {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 0.75rem;
-    color: var(--text);
-    font-family: var(--font);
-    font-size: 0.85rem;
-    resize: vertical;
-    min-height: 100px;
-    outline: none;
-    transition: border-color 0.2s;
-    width: 100%;
-    max-height: 220px;
-  }
+  .summary-area { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.75rem; }
+  .summary-box { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .summary-label { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+  textarea.summary-input { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 0.75rem; color: var(--text); font-family: var(--font); font-size: 0.85rem; resize: vertical; min-height: 100px; outline: none; transition: border-color 0.2s; width: 100%; max-height: 220px; }
   textarea.summary-input:focus { border-color: var(--accent); }
-  .action-row {
-    display: flex;
-    gap: 0.6rem;
-    flex-wrap: wrap;
-  }
-  .action-btn {
-    background: none;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    font-family: var(--font);
-    font-size: 0.8rem;
-    font-weight: 500;
-    padding: 0.5rem 1rem;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
+  .action-row { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .action-btn { background: none; border: 1px solid var(--border); color: var(--muted); font-family: var(--font); font-size: 0.8rem; font-weight: 500; padding: 0.5rem 1rem; border-radius: 10px; cursor: pointer; transition: all 0.2s; }
   .action-btn:hover { border-color: var(--accent); color: var(--accent2); background: rgba(124,92,252,0.1); }
   .action-btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
   .action-btn.primary:hover { background: #8b6cff; }
   .action-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-  .result-box {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 0.85rem 1rem;
-    font-size: 0.85rem;
-    line-height: 1.7;
-    color: var(--text);
-    white-space: pre-wrap;
-    word-break: break-word;
-  }
-
-  /* STATS BAR */
-  .stats-bar {
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-    margin-top: 0.5rem;
-  }
-  .stat {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 0.5rem 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.1rem;
-  }
+  .result-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 0.85rem 1rem; font-size: 0.85rem; line-height: 1.7; color: var(--text); white-space: pre-wrap; word-break: break-word; }
+  .stats-bar { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.5rem; }
+  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 0.5rem 1rem; display: flex; flex-direction: column; gap: 0.1rem; }
   .stat-val { font-size: 1.1rem; font-weight: 700; color: var(--accent2); font-family: var(--mono); }
   .stat-lbl { font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
-
-  /* VIEW TRANSITIONS */
   .view { display: none; }
   .view.active { display: block; }
-
-  .spinner {
-    width: 18px; height: 18px;
-    border: 2px solid rgba(255,255,255,0.2);
-    border-top-color: #fff;
-    border-radius: 50%;
-    animation: spin 0.6s linear infinite;
-    display: inline-block;
-  }
+  .spinner { width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.2); border-top-color: #fff; border-radius: 50%; animation: spin 0.6s linear infinite; display: inline-block; }
   @keyframes spin { to { transform: rotate(360deg); } }
 </style>
 </head>
 <body>
-
 <nav>
   <div class="logo">✦ StudyAI</div>
   <div class="nav-tabs">
@@ -561,7 +120,6 @@
     <button class="tab-btn" onclick="switchView('tools')">🛠 Tools</button>
   </div>
 </nav>
-
 <div class="hero">
   <div class="hero-glow"></div>
   <h1>Your AI-powered<br/><span>Study Companion</span></h1>
@@ -574,35 +132,23 @@
     <span class="pill" onclick="setMode('research')">🔬 Research Help</span>
   </div>
 </div>
-
 <div class="panel">
-
-  <!-- STATS -->
   <div class="stats-bar">
     <div class="stat"><div class="stat-val" id="q-count">0</div><div class="stat-lbl">Questions Asked</div></div>
     <div class="stat"><div class="stat-val" id="fc-count">0</div><div class="stat-lbl">Flashcards Made</div></div>
     <div class="stat"><div class="stat-val" id="s-count">0</div><div class="stat-lbl">Summaries</div></div>
   </div>
-
-  <!-- CHAT VIEW -->
   <div class="view active" id="view-chat" style="margin-top:1.25rem;">
     <div class="chat-container">
       <div class="messages" id="messages">
-        <div class="msg ai">
-          <div class="avatar ai">AI</div>
-          <div class="bubble">
-            👋 Hi! I'm your <strong>StudyAI assistant</strong>. I can help you understand concepts, solve problems, quiz you, and more. What are you studying today?
-          </div>
-        </div>
+        <div class="msg ai"><div class="avatar ai">AI</div><div class="bubble">👋 Hi! I'm your <strong>StudyAI assistant</strong>. What are you studying today?</div></div>
       </div>
-
       <div class="quick-prompts">
-        <button class="quick-btn" onclick="quickPrompt('Explain the Pythagorean theorem simply')">📐 Explain Pythagorean theorem</button>
-        <button class="quick-btn" onclick="quickPrompt('What causes World War 1? Give me key points')">🌍 WW1 causes</button>
+        <button class="quick-btn" onclick="quickPrompt('Explain the Pythagorean theorem simply')">📐 Pythagorean theorem</button>
+        <button class="quick-btn" onclick="quickPrompt('What caused World War 1? Key points')">🌍 WW1 causes</button>
         <button class="quick-btn" onclick="quickPrompt('Quiz me on photosynthesis with 3 questions')">🌿 Quiz: Photosynthesis</button>
-        <button class="quick-btn" onclick="quickPrompt('Help me write a thesis statement about climate change')">✍️ Thesis help</button>
+        <button class="quick-btn" onclick="quickPrompt('Help me write a thesis about climate change')">✍️ Thesis help</button>
       </div>
-
       <div class="input-area">
         <div class="mode-bar">
           <button class="mode-chip active" id="chip-ask" onclick="selectChip('ask')">Ask</button>
@@ -618,24 +164,20 @@
       </div>
     </div>
   </div>
-
-  <!-- FLASHCARDS VIEW -->
   <div class="view" id="view-flashcards" style="margin-top:1.25rem;">
     <div class="flashcard-area">
-      <div class="fc-generate" style="width:100%">
-        <input class="fc-input" id="fcTopic" placeholder="Enter a topic (e.g. Cell Biology, French Revolution, Calculus...)" />
+      <div class="fc-generate">
+        <input class="fc-input" id="fcTopic" placeholder="Enter a topic (e.g. Cell Biology, French Revolution...)" />
         <button class="fc-btn" id="fcBtn" onclick="generateFlashcards()">Generate Cards</button>
       </div>
       <div id="card-deck" class="card-deck"></div>
     </div>
   </div>
-
-  <!-- SUMMARIZE VIEW -->
   <div class="view" id="view-summarize" style="margin-top:1.25rem;">
     <div class="summary-area">
       <div class="summary-box">
         <div class="summary-label">Paste your notes or text</div>
-        <textarea class="summary-input" id="summaryInput" placeholder="Paste lecture notes, a textbook paragraph, an article, or any text you want processed..."></textarea>
+        <textarea class="summary-input" id="summaryInput" placeholder="Paste lecture notes, a textbook paragraph, an article..."></textarea>
         <div class="action-row">
           <button class="action-btn primary" onclick="summarize('summary')" id="sumBtn">Summarize</button>
           <button class="action-btn" onclick="summarize('bullets')" id="bulBtn">Key Points</button>
@@ -649,270 +191,69 @@
       </div>
     </div>
   </div>
-
-  <!-- TOOLS VIEW -->
   <div class="view" id="view-tools" style="margin-top:1.25rem;">
     <div class="tools-grid">
-      <div class="tool-card" onclick="switchToChat('Create a detailed study plan for exams in 2 weeks, covering multiple subjects')">
-        <div class="tool-icon">📅</div>
-        <div class="tool-title">Study Planner</div>
-        <div class="tool-desc">Generate a personalized study schedule for your exams</div>
-      </div>
-      <div class="tool-card" onclick="switchToChat('Give me 5 memory techniques and mnemonics for memorizing complex information')">
-        <div class="tool-icon">🧠</div>
-        <div class="tool-title">Memory Tricks</div>
-        <div class="tool-desc">Learn powerful mnemonics and memory techniques</div>
-      </div>
-      <div class="tool-card" onclick="switchToChat('Help me understand how to solve quadratic equations step by step with examples')">
-        <div class="tool-icon">🔢</div>
-        <div class="tool-title">Math Solver</div>
-        <div class="tool-desc">Step-by-step solutions with explanations</div>
-      </div>
-      <div class="tool-card" onclick="switchToChat('Help me write a well-structured essay outline on a topic of my choice')">
-        <div class="tool-icon">✍️</div>
-        <div class="tool-title">Essay Helper</div>
-        <div class="tool-desc">Thesis, outlines, arguments & structure</div>
-      </div>
-      <div class="tool-card" onclick="switchToChat('Create a mind map structure for the topic: Human Digestive System')">
-        <div class="tool-icon">🗺️</div>
-        <div class="tool-title">Mind Maps</div>
-        <div class="tool-desc">Visual concept organization for any topic</div>
-      </div>
-      <div class="tool-card" onclick="switchToChat('Give me a Socratic dialogue to help me think critically about a philosophical topic')">
-        <div class="tool-icon">🏛️</div>
-        <div class="tool-title">Socratic Method</div>
-        <div class="tool-desc">Deepen understanding through guided questioning</div>
-      </div>
-      <div class="tool-card" onclick="switchToChat('Explain the scientific method and how to design an experiment')">
-        <div class="tool-icon">🔬</div>
-        <div class="tool-title">Science Lab</div>
-        <div class="tool-desc">Experiments, hypotheses, and scientific reasoning</div>
-      </div>
-      <div class="tool-card" onclick="switchToChat('Help me practice for a debate. Give me arguments for and against a controversial topic')">
-        <div class="tool-icon">⚖️</div>
-        <div class="tool-title">Debate Coach</div>
-        <div class="tool-desc">Build arguments, find counterpoints, practice</div>
-      </div>
+      <div class="tool-card" onclick="switchToChat('Create a detailed 2-week study plan for exams covering multiple subjects')"><div class="tool-icon">📅</div><div class="tool-title">Study Planner</div><div class="tool-desc">Personalized schedule for your exams</div></div>
+      <div class="tool-card" onclick="switchToChat('Give me 5 powerful memory techniques and mnemonics for studying')"><div class="tool-icon">🧠</div><div class="tool-title">Memory Tricks</div><div class="tool-desc">Mnemonics and memory techniques</div></div>
+      <div class="tool-card" onclick="switchToChat('Help me solve quadratic equations step by step with examples')"><div class="tool-icon">🔢</div><div class="tool-title">Math Solver</div><div class="tool-desc">Step-by-step solutions with explanations</div></div>
+      <div class="tool-card" onclick="switchToChat('Help me write a well-structured essay outline on a topic')"><div class="tool-icon">✍️</div><div class="tool-title">Essay Helper</div><div class="tool-desc">Thesis, outlines, arguments & structure</div></div>
+      <div class="tool-card" onclick="switchToChat('Create a mind map structure for: Human Digestive System')"><div class="tool-icon">🗺️</div><div class="tool-title">Mind Maps</div><div class="tool-desc">Visual concept organization</div></div>
+      <div class="tool-card" onclick="switchToChat('Help me with debate preparation — give arguments for and against a topic')"><div class="tool-icon">⚖️</div><div class="tool-title">Debate Coach</div><div class="tool-desc">Arguments, counterpoints, practice</div></div>
     </div>
   </div>
-
 </div>
-
 <script>
-  const API_URL = "https://api.anthropic.com/v1/messages";
-  let currentMode = 'ask';
-  let isLoading = false;
-  let qCount = 0, fcCount = 0, sCount = 0;
-
-  const modePrompts = {
-    ask: "You are StudyAI, a helpful, encouraging academic tutor. Answer clearly and concisely. Use examples when helpful. Format with markdown-style bold for key terms.",
-    quiz: "You are StudyAI in quiz mode. Create interactive quiz questions on the topic, wait for answers, then provide feedback. Be encouraging.",
-    explain: "You are StudyAI. Explain concepts in extremely simple terms, as if teaching a 12-year-old. Use analogies, real-world examples, and avoid jargon.",
-    solve: "You are StudyAI. Break down the solution step by step. Number each step clearly. Show all working. Explain why each step is taken.",
-    debate: "You are StudyAI helping with debate practice. Provide strong arguments, counterarguments, and evidence for both sides of the topic."
-  };
-
-  function switchView(v) {
-    document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
-    document.getElementById('view-' + v).classList.add('active');
-    document.querySelectorAll('.tab-btn').forEach((b, i) => {
-      b.classList.toggle('active', ['chat','flashcards','summarize','tools'][i] === v);
-    });
-  }
-
-  function switchToChat(prompt) {
-    switchView('chat');
-    document.getElementById('chatInput').value = prompt;
-    sendMessage();
-  }
-
-  function setMode(m) {
-    const map = {tutor:'ask', quiz:'quiz', explain:'explain', debate:'debate', research:'ask'};
-    selectChip(map[m] || 'ask');
-    switchView('chat');
-  }
-
-  function selectChip(mode) {
-    currentMode = mode;
-    document.querySelectorAll('.mode-chip').forEach(c => c.classList.remove('active'));
-    document.getElementById('chip-' + mode)?.classList.add('active');
-  }
-
-  function handleKey(e) {
-    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
-  }
-
-  function autoResize(el) {
-    el.style.height = 'auto';
-    el.style.height = Math.min(el.scrollHeight, 120) + 'px';
-  }
-
-  function quickPrompt(text) {
-    document.getElementById('chatInput').value = text;
-    sendMessage();
-  }
-
-  function appendMsg(role, text) {
-    const msgs = document.getElementById('messages');
-    const div = document.createElement('div');
-    div.className = 'msg ' + role;
-    div.innerHTML = `<div class="avatar ${role}">${role === 'ai' ? 'AI' : 'You'}</div><div class="bubble">${formatText(text)}</div>`;
-    msgs.appendChild(div);
-    msgs.scrollTop = msgs.scrollHeight;
-    return div;
-  }
-
-  function formatText(text) {
-    return text
-      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-      .replace(/```([\s\S]*?)```/g, '<pre>$1</pre>')
-      .replace(/`(.*?)`/g, '<code style="background:rgba(0,0,0,0.3);padding:1px 5px;border-radius:4px;font-family:var(--mono);font-size:0.85em">$1</code>')
-      .replace(/\n/g, '<br/>');
-  }
-
-  function showTyping() {
-    const msgs = document.getElementById('messages');
-    const div = document.createElement('div');
-    div.className = 'msg ai'; div.id = 'typing';
-    div.innerHTML = '<div class="avatar ai">AI</div><div class="bubble"><div class="typing-indicator"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>';
-    msgs.appendChild(div);
-    msgs.scrollTop = msgs.scrollHeight;
-  }
-
-  function removeTyping() {
-    document.getElementById('typing')?.remove();
-  }
-
+  const WORKER_URL = "https://studyai-api.vedantbir1831.workers.dev";
+  let currentMode = 'ask', isLoading = false, qCount = 0, fcCount = 0, sCount = 0;
   const chatHistory = [];
-
+  const modePrompts = {
+    ask: "You are StudyAI, a helpful academic tutor. Answer clearly. Use bold for key terms.",
+    quiz: "You are StudyAI in quiz mode. Create questions, wait for answers, then give feedback.",
+    explain: "You are StudyAI. Explain concepts simply, like teaching a 12-year-old. Use analogies.",
+    solve: "You are StudyAI. Break down solutions step by step. Number each step. Show all working.",
+    debate: "You are StudyAI helping with debate. Provide strong arguments and counterarguments."
+  };
+  async function callAI(messages, system) {
+    const res = await fetch(WORKER_URL, { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,system:system||modePrompts.ask,messages}) });
+    const data = await res.json();
+    return data.content?.map(b=>b.text||"").join("") || "Error getting response.";
+  }
+  function switchView(v) { document.querySelectorAll('.view').forEach(el=>el.classList.remove('active')); document.getElementById('view-'+v).classList.add('active'); document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',['chat','flashcards','summarize','tools'][i]===v)); }
+  function switchToChat(prompt) { switchView('chat'); document.getElementById('chatInput').value=prompt; sendMessage(); }
+  function setMode(m) { const map={tutor:'ask',quiz:'quiz',explain:'explain',debate:'debate',research:'ask'}; selectChip(map[m]||'ask'); switchView('chat'); }
+  function selectChip(mode) { currentMode=mode; document.querySelectorAll('.mode-chip').forEach(c=>c.classList.remove('active')); document.getElementById('chip-'+mode)?.classList.add('active'); }
+  function handleKey(e) { if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage();} }
+  function autoResize(el) { el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,120)+'px'; }
+  function quickPrompt(text) { document.getElementById('chatInput').value=text; sendMessage(); }
+  function appendMsg(role,text) { const msgs=document.getElementById('messages'); const div=document.createElement('div'); div.className='msg '+role; div.innerHTML=`<div class="avatar ${role}">${role==='ai'?'AI':'You'}</div><div class="bubble">${formatText(text)}</div>`; msgs.appendChild(div); msgs.scrollTop=msgs.scrollHeight; }
+  function formatText(text) { return text.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/```([\s\S]*?)```/g,'<pre>$1</pre>').replace(/`(.*?)`/g,'<code style="background:rgba(0,0,0,0.3);padding:1px 5px;border-radius:4px;font-family:var(--mono);font-size:0.85em">$1</code>').replace(/\n/g,'<br/>'); }
+  function showTyping() { const msgs=document.getElementById('messages'); const div=document.createElement('div'); div.className='msg ai'; div.id='typing'; div.innerHTML='<div class="avatar ai">AI</div><div class="bubble"><div class="typing-indicator"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>'; msgs.appendChild(div); msgs.scrollTop=msgs.scrollHeight; }
+  function removeTyping() { document.getElementById('typing')?.remove(); }
   async function sendMessage() {
-    if (isLoading) return;
-    const inp = document.getElementById('chatInput');
-    const text = inp.value.trim();
-    if (!text) return;
-
-    inp.value = ''; inp.style.height = 'auto';
-    isLoading = true;
-    document.getElementById('sendBtn').disabled = true;
-
-    appendMsg('user', text);
-    chatHistory.push({ role: 'user', content: text });
-    showTyping();
-    qCount++;
-    document.getElementById('q-count').textContent = qCount;
-
-    try {
-      const res = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
-          max_tokens: 1000,
-          system: modePrompts[currentMode] || modePrompts.ask,
-          messages: chatHistory
-        })
-      });
-      const data = await res.json();
-      const reply = data.content?.map(b => b.text || '').join('') || 'Sorry, I encountered an error. Please try again.';
-      chatHistory.push({ role: 'assistant', content: reply });
-      removeTyping();
-      appendMsg('ai', reply);
-    } catch (e) {
-      removeTyping();
-      appendMsg('ai', '⚠️ Connection error. Please check your internet and try again.');
-    }
-
-    isLoading = false;
-    document.getElementById('sendBtn').disabled = false;
+    if(isLoading) return;
+    const inp=document.getElementById('chatInput'); const text=inp.value.trim(); if(!text) return;
+    inp.value=''; inp.style.height='auto'; isLoading=true; document.getElementById('sendBtn').disabled=true;
+    appendMsg('user',text); chatHistory.push({role:'user',content:text}); showTyping(); qCount++; document.getElementById('q-count').textContent=qCount;
+    try { const reply=await callAI(chatHistory,modePrompts[currentMode]); chatHistory.push({role:'assistant',content:reply}); removeTyping(); appendMsg('ai',reply); }
+    catch(e) { removeTyping(); appendMsg('ai','⚠️ Could not connect. Check your Worker URL.'); }
+    isLoading=false; document.getElementById('sendBtn').disabled=false;
   }
-
   async function generateFlashcards() {
-    const topic = document.getElementById('fcTopic').value.trim();
-    if (!topic) return;
-    const btn = document.getElementById('fcBtn');
-    btn.disabled = true;
-    btn.innerHTML = '<span class="spinner"></span>';
-    document.getElementById('card-deck').innerHTML = '<div style="color:var(--muted);font-size:0.85rem;text-align:center;padding:1.5rem">Generating flashcards...</div>';
-
-    try {
-      const res = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
-          max_tokens: 1000,
-          messages: [{
-            role: 'user',
-            content: `Generate exactly 6 flashcards for the topic: "${topic}". Return ONLY a JSON array, no markdown, no explanation. Format: [{"q":"question","a":"answer"},...]. Make questions thought-provoking and answers concise (1-2 sentences).`
-          }]
-        })
-      });
-      const data = await res.json();
-      const txt = data.content?.map(b => b.text || '').join('') || '[]';
-      const clean = txt.replace(/```json|```/g, '').trim();
-      const cards = JSON.parse(clean);
-      renderCards(cards);
-      fcCount += cards.length;
-      document.getElementById('fc-count').textContent = fcCount;
-    } catch (e) {
-      document.getElementById('card-deck').innerHTML = '<div style="color:var(--danger);font-size:0.85rem;text-align:center;padding:1rem">Failed to generate. Please try again.</div>';
-    }
-
-    btn.disabled = false;
-    btn.textContent = 'Generate Cards';
+    const topic=document.getElementById('fcTopic').value.trim(); if(!topic) return;
+    const btn=document.getElementById('fcBtn'); btn.disabled=true; btn.innerHTML='<span class="spinner"></span>';
+    document.getElementById('card-deck').innerHTML='<div style="color:var(--muted);text-align:center;padding:1.5rem;font-size:0.85rem">Generating flashcards...</div>';
+    try { const reply=await callAI([{role:'user',content:`Generate exactly 6 flashcards for: "${topic}". Return ONLY a JSON array, no markdown. Format: [{"q":"question","a":"answer"}]. Concise answers (1-2 sentences).`}]); const clean=reply.replace(/```json|```/g,'').trim(); const cards=JSON.parse(clean); const deck=document.getElementById('card-deck'); deck.innerHTML=''; cards.forEach((c,i)=>{ const div=document.createElement('div'); div.className='flashcard'; div.innerHTML=`<div class="fc-q">${i+1}. ${c.q}</div><div class="fc-hint" style="margin-top:4px;font-size:0.72rem;color:var(--muted)">Click to reveal answer</div><div class="fc-a">${c.a}</div>`; div.onclick=()=>{ div.classList.toggle('flipped'); div.querySelector('.fc-hint').style.display=div.classList.contains('flipped')?'none':'block'; }; deck.appendChild(div); }); fcCount+=cards.length; document.getElementById('fc-count').textContent=fcCount; }
+    catch(e) { document.getElementById('card-deck').innerHTML='<div style="color:var(--danger);text-align:center;padding:1rem;font-size:0.85rem">Failed to generate.</div>'; }
+    btn.disabled=false; btn.textContent='Generate Cards';
   }
-
-  function renderCards(cards) {
-    const deck = document.getElementById('card-deck');
-    deck.innerHTML = '';
-    cards.forEach((c, i) => {
-      const div = document.createElement('div');
-      div.className = 'flashcard';
-      div.innerHTML = `<div class="fc-q">${i+1}. ${c.q}</div><div class="fc-hint" style="margin-top:4px;color:var(--muted);font-size:0.72rem">Click to reveal answer</div><div class="fc-a">${c.a}</div>`;
-      div.onclick = () => { div.classList.toggle('flipped'); div.querySelector('.fc-hint').style.display = div.classList.contains('flipped') ? 'none' : 'block'; };
-      deck.appendChild(div);
-    });
-  }
-
   async function summarize(type) {
-    const text = document.getElementById('summaryInput').value.trim();
-    if (!text) return;
-
-    const prompts = {
-      summary: 'Summarize the following text in 3-5 concise sentences, capturing the main ideas:',
-      bullets: 'Extract the 5-7 most important key points from this text as bullet points (use • ):',
-      questions: 'Generate 5 study questions based on this text that would help a student review the material:',
-      explain: 'Explain the main concepts in this text in simple, easy-to-understand language for a student:'
-    };
-
-    const btns = ['sumBtn','bulBtn','qsBtn','expBtn'];
-    btns.forEach(id => document.getElementById(id).disabled = true);
-
-    const resultBox = document.getElementById('summaryResult');
-    const output = document.getElementById('summaryOutput');
-    resultBox.style.display = 'block';
-    output.textContent = 'Processing...';
-
-    try {
-      const res = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
-          max_tokens: 1000,
-          messages: [{ role: 'user', content: prompts[type] + '\n\n' + text }]
-        })
-      });
-      const data = await res.json();
-      const reply = data.content?.map(b => b.text || '').join('') || 'Error processing text.';
-      output.textContent = reply;
-      sCount++;
-      document.getElementById('s-count').textContent = sCount;
-    } catch (e) {
-      output.textContent = 'Error connecting to AI. Please try again.';
-    }
-
-    btns.forEach(id => document.getElementById(id).disabled = false);
+    const text=document.getElementById('summaryInput').value.trim(); if(!text) return;
+    const prompts={summary:'Summarize in 3-5 concise sentences:',bullets:'Extract 5-7 key points as bullet points (use •):',questions:'Generate 5 study questions from this text:',explain:'Explain the main concepts simply for a student:'};
+    ['sumBtn','bulBtn','qsBtn','expBtn'].forEach(id=>document.getElementById(id).disabled=true);
+    const resultBox=document.getElementById('summaryResult'); const output=document.getElementById('summaryOutput'); resultBox.style.display='block'; output.textContent='Processing...';
+    try { const reply=await callAI([{role:'user',content:prompts[type]+'\n\n'+text}]); output.textContent=reply; sCount++; document.getElementById('s-count').textContent=sCount; }
+    catch(e) { output.textContent='Error connecting.'; }
+    ['sumBtn','bulBtn','qsBtn','expBtn'].forEach(id=>document.getElementById(id).disabled=false);
   }
 </script>
 </body>
