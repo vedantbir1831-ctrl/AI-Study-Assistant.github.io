@@ -68,9 +68,8 @@
   .send-btn { background: linear-gradient(135deg,#7c5cfc,#5b3fd4); border: none; color: #fff; width: 38px; height: 38px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; font-size: 1rem; }
   .send-btn:hover { transform: scale(1.05); }
   .send-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
-  .search-toggle { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: var(--muted); cursor: pointer; }
+  .search-toggle { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: var(--accent2); cursor: pointer; }
   .search-toggle input { accent-color: var(--accent); cursor: pointer; }
-  .search-toggle.on { color: var(--accent2); }
   .quick-prompts { display: flex; gap: 0.5rem; flex-wrap: wrap; }
   .quick-btn { font-size: 0.74rem; padding: 0.35rem 0.75rem; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); color: var(--muted); cursor: pointer; font-family: var(--font); transition: all 0.2s; }
   .quick-btn:hover { border-color: var(--accent); color: var(--text); background: rgba(124,92,252,0.1); }
@@ -86,16 +85,16 @@
   .result-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 0.85rem 1rem; font-size: 0.83rem; line-height: 1.7; color: var(--text); white-space: pre-wrap; word-break: break-word; max-height: 300px; overflow-y: auto; }
   .video-area { margin-top: 1.25rem; display: flex; flex-direction: column; gap: 1rem; }
   .video-input-row { display: flex; gap: 0.75rem; }
-  .video-input { flex: 1; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 0.65rem 1rem; color: var(--text); font-family: var(--font); font-size: 0.85rem; outline: none; transition: border-color 0.2s; }
+  .video-input { flex: 1; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 0.65rem 1rem; color: var(--text); font-family: var(--font); font-size: 0.85rem; outline: none; }
   .video-input:focus { border-color: var(--accent); }
-  .video-btn { background: var(--accent); border: none; color: #fff; font-family: var(--font); font-weight: 600; font-size: 0.82rem; padding: 0 1.2rem; border-radius: 12px; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
+  .video-btn { background: var(--accent); border: none; color: #fff; font-family: var(--font); font-weight: 600; font-size: 0.82rem; padding: 0 1.2rem; border-radius: 12px; cursor: pointer; white-space: nowrap; }
   .video-btn:disabled { opacity: 0.4; cursor: not-allowed; }
   .video-options { display: flex; gap: 0.5rem; flex-wrap: wrap; }
   .opt-btn { font-size: 0.75rem; padding: 0.4rem 0.85rem; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); color: var(--muted); cursor: pointer; font-family: var(--font); transition: all 0.2s; }
   .opt-btn.active { border-color: var(--accent); color: var(--accent2); background: rgba(124,92,252,0.12); }
   .flashcard-area { display: flex; flex-direction: column; gap: 1.25rem; margin-top: 1.25rem; }
   .fc-generate { display: flex; gap: 0.75rem; }
-  .fc-input { flex: 1; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 0.65rem 1rem; color: var(--text); font-family: var(--font); font-size: 0.85rem; outline: none; transition: border-color 0.2s; }
+  .fc-input { flex: 1; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 0.65rem 1rem; color: var(--text); font-family: var(--font); font-size: 0.85rem; outline: none; }
   .fc-input:focus { border-color: var(--accent); }
   .fc-btn { background: var(--accent); border: none; color: #fff; font-family: var(--font); font-weight: 600; font-size: 0.82rem; padding: 0 1.2rem; border-radius: 12px; cursor: pointer; white-space: nowrap; }
   .fc-btn:disabled { opacity: 0.4; cursor: not-allowed; }
@@ -164,13 +163,13 @@
   <div class="view active" id="view-chat">
     <div class="chat-container">
       <div class="messages" id="messages">
-        <div class="msg ai"><div class="avatar ai">AI</div><div class="bubble">👋 Hi! I'm your <strong>StudyAI assistant</strong>. I can search the web, analyze photos and PDFs, and summarize YouTube lectures. What are you studying today?</div></div>
+        <div class="msg ai"><div class="avatar ai">AI</div><div class="bubble">👋 Hi! I'm your <strong>StudyAI assistant</strong> with <strong>live web search enabled</strong>! I can find current information, analyze photos and PDFs, and summarize YouTube lectures. What are you studying today?</div></div>
       </div>
       <div class="quick-prompts">
         <button class="quick-btn" onclick="quickPrompt('Explain the Pythagorean theorem simply')">📐 Pythagorean theorem</button>
         <button class="quick-btn" onclick="quickPrompt('What caused World War 1?')">🌍 WW1 causes</button>
         <button class="quick-btn" onclick="quickPrompt('Quiz me on photosynthesis with 3 questions')">🌿 Quiz: Photosynthesis</button>
-        <button class="quick-btn" onclick="quickPrompt('Who is the current Prime Minister of India?', true)">🔍 Current PM of India</button>
+        <button class="quick-btn" onclick="quickPrompt('Who is the current Chief Minister of Tamil Nadu?')">🔍 CM of Tamil Nadu</button>
       </div>
       <div class="input-area">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;">
@@ -182,11 +181,11 @@
             <button class="mode-chip" id="chip-debate" onclick="selectChip('debate')">Debate</button>
           </div>
           <label class="search-toggle" id="searchToggle">
-            <input type="checkbox" id="webSearch" onchange="toggleSearch()"> 🌐 Web Search
+            <input type="checkbox" id="webSearch" onchange="toggleSearch()" checked> 🌐 Web Search ON
           </label>
         </div>
         <div class="input-row">
-          <textarea id="chatInput" placeholder="Ask anything... (enable Web Search for current events)" rows="1" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+          <textarea id="chatInput" placeholder="Ask anything... Web Search is ON for current info!" rows="1" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
           <button class="send-btn" id="sendBtn" onclick="sendMessage()">➤</button>
         </div>
       </div>
@@ -229,7 +228,7 @@
         <h3>🎥 YouTube Lecture Notes <span class="badge new">NEW</span></h3>
         <p style="font-size:0.78rem;color:var(--muted)">Paste any YouTube video link and get AI-generated notes</p>
         <div class="video-input-row">
-          <input class="video-input" id="videoUrl" placeholder="Paste YouTube URL here... e.g. https://youtube.com/watch?v=..." />
+          <input class="video-input" id="videoUrl" placeholder="Paste YouTube URL here..." />
           <button class="video-btn" id="videoBtn" onclick="processVideo()">Get Notes</button>
         </div>
         <div class="video-options">
@@ -286,7 +285,7 @@
   const WORKER_URL = "https://studyai-api.vedantbir1831.workers.dev";
   let currentMode = 'ask', isLoading = false;
   let qCount = 0, fcCount = 0, sCount = 0, vCount = 0;
-  let webSearchOn = false, videoOpt = 'summary';
+  let webSearchOn = true, videoOpt = 'summary';
   let photoBase64 = null, pdfText = null;
   const chatHistory = [];
   const modePrompts = {
@@ -305,10 +304,10 @@
   function switchToChat(prompt) { switchView('chat'); document.getElementById('chatInput').value=prompt; sendMessage(); }
   function setMode(m) { const map={tutor:'ask',quiz:'quiz',explain:'explain',debate:'debate',research:'ask'}; selectChip(map[m]||'ask'); switchView('chat'); }
   function selectChip(mode) { currentMode=mode; document.querySelectorAll('.mode-chip').forEach(c=>c.classList.remove('active')); document.getElementById('chip-'+mode)?.classList.add('active'); }
-  function toggleSearch() { webSearchOn=document.getElementById('webSearch').checked; document.getElementById('searchToggle').classList.toggle('on',webSearchOn); }
+  function toggleSearch() { webSearchOn=document.getElementById('webSearch').checked; }
   function handleKey(e) { if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage();} }
   function autoResize(el) { el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,120)+'px'; }
-  function quickPrompt(text,search) { if(search){document.getElementById('webSearch').checked=true;webSearchOn=true;document.getElementById('searchToggle').classList.add('on');} document.getElementById('chatInput').value=text; sendMessage(); }
+  function quickPrompt(text) { document.getElementById('chatInput').value=text; sendMessage(); }
   function selectOpt(o) { videoOpt=o; document.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('active')); document.getElementById('opt-'+o)?.classList.add('active'); }
   function appendMsg(role,text) { const msgs=document.getElementById('messages'); const div=document.createElement('div'); div.className='msg '+role; div.innerHTML=`<div class="avatar ${role}">${role==='ai'?'AI':'You'}</div><div class="bubble">${formatText(text)}</div>`; msgs.appendChild(div); msgs.scrollTop=msgs.scrollHeight; }
   function formatText(t) { return t.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/```([\s\S]*?)```/g,'<pre>$1</pre>').replace(/`(.*?)`/g,'<code style="background:rgba(0,0,0,0.3);padding:1px 5px;border-radius:4px;font-family:var(--mono);font-size:0.85em">$1</code>').replace(/\n/g,'<br/>'); }
@@ -323,12 +322,7 @@
     catch(e) { removeTyping(); appendMsg('ai','⚠️ Could not connect. Please try again.'); }
     isLoading=false; document.getElementById('sendBtn').disabled=false;
   }
-  function handlePhotoUpload(e) {
-    const file=e.target.files[0]; if(!file) return;
-    const reader=new FileReader();
-    reader.onload=()=>{ photoBase64=reader.result.split(',')[1]; document.getElementById('photoPreview').innerHTML='✅ '+file.name+'<br/><span style="font-size:0.7rem;color:var(--accent3)">Ready to process</span>'; document.getElementById('photoSumBtn').disabled=false; document.getElementById('photoNoteBtn').disabled=false; };
-    reader.readAsDataURL(file);
-  }
+  function handlePhotoUpload(e) { const file=e.target.files[0]; if(!file) return; const reader=new FileReader(); reader.onload=()=>{ photoBase64=reader.result.split(',')[1]; document.getElementById('photoPreview').innerHTML='✅ '+file.name+'<br/><span style="font-size:0.7rem;color:var(--accent3)">Ready to process</span>'; document.getElementById('photoSumBtn').disabled=false; document.getElementById('photoNoteBtn').disabled=false; }; reader.readAsDataURL(file); }
   async function processPhoto(type) {
     if(!photoBase64) return;
     const btn=document.getElementById(type==='summary'?'photoSumBtn':'photoNoteBtn'); btn.innerHTML='<span class="spinner"></span>'; btn.disabled=true;
@@ -338,12 +332,7 @@
     catch(e) { resultEl.textContent='Error processing image.'; }
     btn.innerHTML=type==='summary'?'Summarize':'Get Notes'; btn.disabled=false;
   }
-  function handlePDFUpload(e) {
-    const file=e.target.files[0]; if(!file) return;
-    const reader=new FileReader();
-    reader.onload=()=>{ pdfText="PDF: "+file.name+" ("+Math.round(file.size/1024)+"KB)"; document.getElementById('pdfPreview').innerHTML='✅ '+file.name+'<br/><span style="font-size:0.7rem;color:var(--accent3)">Ready to process</span>'; document.getElementById('pdfSumBtn').disabled=false; document.getElementById('pdfNoteBtn').disabled=false; document.getElementById('pdfQBtn').disabled=false; };
-    reader.readAsArrayBuffer(file);
-  }
+  function handlePDFUpload(e) { const file=e.target.files[0]; if(!file) return; const reader=new FileReader(); reader.onload=()=>{ pdfText="PDF: "+file.name+" ("+Math.round(file.size/1024)+"KB)"; document.getElementById('pdfPreview').innerHTML='✅ '+file.name+'<br/><span style="font-size:0.7rem;color:var(--accent3)">Ready to process</span>'; document.getElementById('pdfSumBtn').disabled=false; document.getElementById('pdfNoteBtn').disabled=false; document.getElementById('pdfQBtn').disabled=false; }; reader.readAsArrayBuffer(file); }
   async function processPDF(type) {
     if(!pdfText) return;
     const btnMap={summary:'pdfSumBtn',notes:'pdfNoteBtn',questions:'pdfQBtn'};
