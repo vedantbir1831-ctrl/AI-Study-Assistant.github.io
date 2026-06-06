@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>StudyAI</title>
+<title>StudyAI - Your AI Study Companion</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -15,23 +15,29 @@
     --font: 'Sora', sans-serif; --mono: 'Space Mono', monospace;
   }
   body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
-  nav { display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; border-bottom: 1px solid var(--border); background: rgba(10,10,15,0.9); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100; }
-  .logo { font-size: 1.3rem; font-weight: 700; background: linear-gradient(135deg,#7c5cfc,#a78bfa,#34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -0.5px; }
-  .nav-tabs { display: flex; gap: 0.25rem; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 4px; }
-  .tab-btn { background: none; border: none; color: var(--muted); font-family: var(--font); font-size: 0.82rem; font-weight: 500; padding: 0.45rem 1rem; border-radius: 8px; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+  nav { display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; border-bottom: 1px solid var(--border); background: rgba(10,10,15,0.9); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100; flex-wrap: wrap; gap: 0.5rem; }
+  .logo { font-size: 1.3rem; font-weight: 700; background: linear-gradient(135deg,#7c5cfc,#a78bfa,#34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .nav-tabs { display: flex; gap: 0.25rem; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 4px; flex-wrap: wrap; }
+  .tab-btn { background: none; border: none; color: var(--muted); font-family: var(--font); font-size: 0.78rem; font-weight: 500; padding: 0.4rem 0.8rem; border-radius: 8px; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
   .tab-btn.active { background: var(--accent); color: #fff; }
   .tab-btn:hover:not(.active) { color: var(--text); background: var(--surface2); }
-  .hero { text-align: center; padding: 3.5rem 2rem 2.5rem; position: relative; }
+  .hero { text-align: center; padding: 2.5rem 2rem 2rem; position: relative; }
   .hero-glow { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 600px; height: 300px; background: radial-gradient(ellipse at center, rgba(124,92,252,0.15) 0%, transparent 70%); pointer-events: none; }
-  .hero h1 { font-size: clamp(1.8rem,4vw,2.8rem); font-weight: 700; letter-spacing: -1px; line-height: 1.15; margin-bottom: 0.75rem; }
+  .hero h1 { font-size: clamp(1.6rem,4vw,2.5rem); font-weight: 700; letter-spacing: -1px; line-height: 1.15; margin-bottom: 0.6rem; }
   .hero h1 span { background: linear-gradient(135deg,#7c5cfc,#34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-  .hero p { color: var(--muted); font-size: 1rem; max-width: 480px; margin: 0 auto; line-height: 1.6; }
-  .pills { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-top: 1.25rem; }
-  .pill { font-size: 0.75rem; font-weight: 500; padding: 0.35rem 0.85rem; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--muted); cursor: pointer; transition: all 0.2s; }
+  .hero p { color: var(--muted); font-size: 0.95rem; max-width: 480px; margin: 0 auto; line-height: 1.6; }
+  .pills { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-top: 1rem; }
+  .pill { font-size: 0.72rem; font-weight: 500; padding: 0.3rem 0.75rem; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--muted); cursor: pointer; transition: all 0.2s; }
   .pill:hover { border-color: var(--accent); color: var(--accent2); background: rgba(124,92,252,0.12); }
-  .panel { flex: 1; display: flex; flex-direction: column; max-width: 860px; width: 100%; margin: 0 auto; padding: 0 1.5rem 2rem; }
-  .chat-container { display: flex; flex-direction: column; gap: 1rem; flex: 1; }
-  .messages { display: flex; flex-direction: column; gap: 1rem; min-height: 260px; max-height: 420px; overflow-y: auto; padding: 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; scroll-behavior: smooth; }
+  .panel { flex: 1; display: flex; flex-direction: column; max-width: 900px; width: 100%; margin: 0 auto; padding: 0 1.5rem 2rem; }
+  .stats-bar { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.75rem; }
+  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 0.5rem 1rem; display: flex; flex-direction: column; gap: 0.1rem; }
+  .stat-val { font-size: 1.1rem; font-weight: 700; color: var(--accent2); font-family: var(--mono); }
+  .stat-lbl { font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .view { display: none; }
+  .view.active { display: block; }
+  .chat-container { display: flex; flex-direction: column; gap: 1rem; margin-top: 1.25rem; }
+  .messages { display: flex; flex-direction: column; gap: 1rem; min-height: 260px; max-height: 400px; overflow-y: auto; padding: 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; scroll-behavior: smooth; }
   .messages::-webkit-scrollbar { width: 4px; }
   .messages::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
   .msg { display: flex; gap: 0.75rem; animation: fadeUp 0.3s ease; }
@@ -62,52 +68,66 @@
   .send-btn { background: linear-gradient(135deg,#7c5cfc,#5b3fd4); border: none; color: #fff; width: 38px; height: 38px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; font-size: 1rem; }
   .send-btn:hover { transform: scale(1.05); }
   .send-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
-  .quick-prompts { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.25rem; }
-  .quick-btn { font-size: 0.76rem; padding: 0.4rem 0.8rem; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); color: var(--muted); cursor: pointer; font-family: var(--font); transition: all 0.2s; }
+  .search-toggle { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: var(--muted); cursor: pointer; }
+  .search-toggle input { accent-color: var(--accent); cursor: pointer; }
+  .search-toggle.on { color: var(--accent2); }
+  .quick-prompts { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .quick-btn { font-size: 0.74rem; padding: 0.35rem 0.75rem; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); color: var(--muted); cursor: pointer; font-family: var(--font); transition: all 0.2s; }
   .quick-btn:hover { border-color: var(--accent); color: var(--text); background: rgba(124,92,252,0.1); }
-  .tools-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 1rem; margin-top: 1rem; }
-  .tool-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 1.25rem; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; gap: 0.5rem; }
-  .tool-card:hover { border-color: var(--accent); background: rgba(124,92,252,0.08); transform: translateY(-2px); }
-  .tool-icon { font-size: 1.5rem; }
-  .tool-title { font-weight: 600; font-size: 0.9rem; }
-  .tool-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
-  .flashcard-area { display: flex; flex-direction: column; align-items: center; gap: 1.25rem; margin-top: 1rem; }
-  .fc-generate { display: flex; gap: 0.75rem; width: 100%; }
+  .upload-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-top: 1.25rem; }
+  .upload-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 1.25rem; display: flex; flex-direction: column; gap: 0.75rem; }
+  .upload-card h3 { font-size: 0.95rem; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; }
+  .upload-zone { border: 2px dashed var(--border2); border-radius: 12px; padding: 1.5rem; text-align: center; cursor: pointer; transition: all 0.2s; color: var(--muted); font-size: 0.82rem; }
+  .upload-zone:hover { border-color: var(--accent); color: var(--accent2); background: rgba(124,92,252,0.05); }
+  .upload-zone input { display: none; }
+  .process-btn { background: var(--accent); border: none; color: #fff; font-family: var(--font); font-weight: 600; font-size: 0.82rem; padding: 0.6rem 1.2rem; border-radius: 10px; cursor: pointer; transition: all 0.2s; }
+  .process-btn:hover { background: #8b6cff; }
+  .process-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .result-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 0.85rem 1rem; font-size: 0.83rem; line-height: 1.7; color: var(--text); white-space: pre-wrap; word-break: break-word; max-height: 300px; overflow-y: auto; }
+  .video-area { margin-top: 1.25rem; display: flex; flex-direction: column; gap: 1rem; }
+  .video-input-row { display: flex; gap: 0.75rem; }
+  .video-input { flex: 1; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 0.65rem 1rem; color: var(--text); font-family: var(--font); font-size: 0.85rem; outline: none; transition: border-color 0.2s; }
+  .video-input:focus { border-color: var(--accent); }
+  .video-btn { background: var(--accent); border: none; color: #fff; font-family: var(--font); font-weight: 600; font-size: 0.82rem; padding: 0 1.2rem; border-radius: 12px; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
+  .video-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .video-options { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .opt-btn { font-size: 0.75rem; padding: 0.4rem 0.85rem; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); color: var(--muted); cursor: pointer; font-family: var(--font); transition: all 0.2s; }
+  .opt-btn.active { border-color: var(--accent); color: var(--accent2); background: rgba(124,92,252,0.12); }
+  .flashcard-area { display: flex; flex-direction: column; gap: 1.25rem; margin-top: 1.25rem; }
+  .fc-generate { display: flex; gap: 0.75rem; }
   .fc-input { flex: 1; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 0.65rem 1rem; color: var(--text); font-family: var(--font); font-size: 0.85rem; outline: none; transition: border-color 0.2s; }
   .fc-input:focus { border-color: var(--accent); }
-  .fc-btn { background: var(--accent); border: none; color: #fff; font-family: var(--font); font-weight: 600; font-size: 0.82rem; padding: 0 1.2rem; border-radius: 12px; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
-  .fc-btn:hover { background: #8b6cff; }
+  .fc-btn { background: var(--accent); border: none; color: #fff; font-family: var(--font); font-weight: 600; font-size: 0.82rem; padding: 0 1.2rem; border-radius: 12px; cursor: pointer; white-space: nowrap; }
   .fc-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-  .card-deck { width: 100%; display: flex; flex-direction: column; gap: 0.75rem; }
+  .card-deck { display: flex; flex-direction: column; gap: 0.75rem; }
   .flashcard { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1rem 1.25rem; cursor: pointer; transition: all 0.2s; position: relative; overflow: hidden; }
   .flashcard:hover { border-color: var(--accent); }
   .flashcard.flipped { background: rgba(52,211,153,0.08); border-color: var(--accent3); }
   .flashcard::before { content:''; position:absolute; top:0; left:0; width:4px; height:100%; background:var(--accent); border-radius:4px 0 0 4px; }
   .flashcard.flipped::before { background: var(--accent3); }
-  .fc-q { font-size: 0.88rem; font-weight: 500; margin-bottom: 0.4rem; }
+  .fc-q { font-size: 0.88rem; font-weight: 500; }
   .fc-a { font-size: 0.82rem; color: var(--accent3); display: none; margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--border); }
   .flashcard.flipped .fc-a { display: block; }
-  .fc-hint { font-size: 0.7rem; color: var(--muted); }
-  .summary-area { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.75rem; }
+  .fc-hint { font-size: 0.7rem; color: var(--muted); margin-top: 4px; }
+  .summary-area { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.25rem; }
   .summary-box { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
   .summary-label { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
-  textarea.summary-input { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 0.75rem; color: var(--text); font-family: var(--font); font-size: 0.85rem; resize: vertical; min-height: 100px; outline: none; transition: border-color 0.2s; width: 100%; max-height: 220px; }
-  textarea.summary-input:focus { border-color: var(--accent); }
+  textarea.summary-input { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 0.75rem; color: var(--text); font-family: var(--font); font-size: 0.85rem; resize: vertical; min-height: 100px; outline: none; width: 100%; max-height: 220px; }
   .action-row { display: flex; gap: 0.6rem; flex-wrap: wrap; }
   .action-btn { background: none; border: 1px solid var(--border); color: var(--muted); font-family: var(--font); font-size: 0.8rem; font-weight: 500; padding: 0.5rem 1rem; border-radius: 10px; cursor: pointer; transition: all 0.2s; }
   .action-btn:hover { border-color: var(--accent); color: var(--accent2); background: rgba(124,92,252,0.1); }
   .action-btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .action-btn.primary:hover { background: #8b6cff; }
   .action-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-  .result-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 0.85rem 1rem; font-size: 0.85rem; line-height: 1.7; color: var(--text); white-space: pre-wrap; word-break: break-word; }
-  .stats-bar { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.5rem; }
-  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 0.5rem 1rem; display: flex; flex-direction: column; gap: 0.1rem; }
-  .stat-val { font-size: 1.1rem; font-weight: 700; color: var(--accent2); font-family: var(--mono); }
-  .stat-lbl { font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
-  .view { display: none; }
-  .view.active { display: block; }
-  .spinner { width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.2); border-top-color: #fff; border-radius: 50%; animation: spin 0.6s linear infinite; display: inline-block; }
+  .tools-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(190px,1fr)); gap: 1rem; margin-top: 1.25rem; }
+  .tool-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 1.25rem; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; gap: 0.5rem; }
+  .tool-card:hover { border-color: var(--accent); background: rgba(124,92,252,0.08); transform: translateY(-2px); }
+  .tool-icon { font-size: 1.5rem; }
+  .tool-title { font-weight: 600; font-size: 0.9rem; }
+  .tool-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+  .spinner { width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.6s linear infinite; display: inline-block; vertical-align: middle; }
   @keyframes spin { to { transform: rotate(360deg); } }
+  .badge { display: inline-flex; align-items: center; gap: 4px; font-size: 0.68rem; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+  .badge.new { background: rgba(52,211,153,0.15); color: var(--accent3); border: 1px solid rgba(52,211,153,0.3); }
 </style>
 </head>
 <body>
@@ -115,74 +135,132 @@
   <div class="logo">✦ StudyAI</div>
   <div class="nav-tabs">
     <button class="tab-btn active" onclick="switchView('chat')">💬 Chat</button>
-    <button class="tab-btn" onclick="switchView('flashcards')">🃏 Flashcards</button>
-    <button class="tab-btn" onclick="switchView('summarize')">📄 Summarize</button>
+    <button class="tab-btn" onclick="switchView('upload')">📎 Upload</button>
+    <button class="tab-btn" onclick="switchView('video')">🎥 Video</button>
+    <button class="tab-btn" onclick="switchView('flashcards')">🃏 Cards</button>
+    <button class="tab-btn" onclick="switchView('summarize')">📄 Notes</button>
     <button class="tab-btn" onclick="switchView('tools')">🛠 Tools</button>
   </div>
 </nav>
 <div class="hero">
   <div class="hero-glow"></div>
   <h1>Your AI-powered<br/><span>Study Companion</span></h1>
-  <p>Ask anything. Summarize lectures. Generate flashcards. Ace every exam.</p>
+  <p>Chat • Upload Photos & PDFs • YouTube Notes • Flashcards • Web Search</p>
   <div class="pills">
-    <span class="pill" onclick="setMode('tutor')">🎓 Tutor Mode</span>
+    <span class="pill" onclick="setMode('tutor')">🎓 Tutor</span>
     <span class="pill" onclick="setMode('quiz')">❓ Quiz Me</span>
-    <span class="pill" onclick="setMode('explain')">💡 Explain Simply</span>
-    <span class="pill" onclick="setMode('debate')">⚡ Debate Practice</span>
-    <span class="pill" onclick="setMode('research')">🔬 Research Help</span>
+    <span class="pill" onclick="setMode('explain')">💡 Simplify</span>
+    <span class="pill" onclick="setMode('debate')">⚡ Debate</span>
+    <span class="pill" onclick="setMode('research')">🔬 Research</span>
   </div>
 </div>
 <div class="panel">
   <div class="stats-bar">
-    <div class="stat"><div class="stat-val" id="q-count">0</div><div class="stat-lbl">Questions Asked</div></div>
-    <div class="stat"><div class="stat-val" id="fc-count">0</div><div class="stat-lbl">Flashcards Made</div></div>
+    <div class="stat"><div class="stat-val" id="q-count">0</div><div class="stat-lbl">Questions</div></div>
+    <div class="stat"><div class="stat-val" id="fc-count">0</div><div class="stat-lbl">Flashcards</div></div>
     <div class="stat"><div class="stat-val" id="s-count">0</div><div class="stat-lbl">Summaries</div></div>
+    <div class="stat"><div class="stat-val" id="v-count">0</div><div class="stat-lbl">Videos</div></div>
   </div>
-  <div class="view active" id="view-chat" style="margin-top:1.25rem;">
+  <div class="view active" id="view-chat">
     <div class="chat-container">
       <div class="messages" id="messages">
-        <div class="msg ai"><div class="avatar ai">AI</div><div class="bubble">👋 Hi! I'm your <strong>StudyAI assistant</strong>. What are you studying today?</div></div>
+        <div class="msg ai"><div class="avatar ai">AI</div><div class="bubble">👋 Hi! I'm your <strong>StudyAI assistant</strong>. I can search the web, analyze photos and PDFs, and summarize YouTube lectures. What are you studying today?</div></div>
       </div>
       <div class="quick-prompts">
         <button class="quick-btn" onclick="quickPrompt('Explain the Pythagorean theorem simply')">📐 Pythagorean theorem</button>
-        <button class="quick-btn" onclick="quickPrompt('What caused World War 1? Key points')">🌍 WW1 causes</button>
+        <button class="quick-btn" onclick="quickPrompt('What caused World War 1?')">🌍 WW1 causes</button>
         <button class="quick-btn" onclick="quickPrompt('Quiz me on photosynthesis with 3 questions')">🌿 Quiz: Photosynthesis</button>
-        <button class="quick-btn" onclick="quickPrompt('Help me write a thesis about climate change')">✍️ Thesis help</button>
+        <button class="quick-btn" onclick="quickPrompt('Who is the current Prime Minister of India?', true)">🔍 Current PM of India</button>
       </div>
       <div class="input-area">
-        <div class="mode-bar">
-          <button class="mode-chip active" id="chip-ask" onclick="selectChip('ask')">Ask</button>
-          <button class="mode-chip" id="chip-quiz" onclick="selectChip('quiz')">Quiz Me</button>
-          <button class="mode-chip" id="chip-explain" onclick="selectChip('explain')">Explain Simply</button>
-          <button class="mode-chip" id="chip-solve" onclick="selectChip('solve')">Solve Step-by-Step</button>
-          <button class="mode-chip" id="chip-debate" onclick="selectChip('debate')">Debate Prep</button>
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;">
+          <div class="mode-bar">
+            <button class="mode-chip active" id="chip-ask" onclick="selectChip('ask')">Ask</button>
+            <button class="mode-chip" id="chip-quiz" onclick="selectChip('quiz')">Quiz Me</button>
+            <button class="mode-chip" id="chip-explain" onclick="selectChip('explain')">Simplify</button>
+            <button class="mode-chip" id="chip-solve" onclick="selectChip('solve')">Step-by-Step</button>
+            <button class="mode-chip" id="chip-debate" onclick="selectChip('debate')">Debate</button>
+          </div>
+          <label class="search-toggle" id="searchToggle">
+            <input type="checkbox" id="webSearch" onchange="toggleSearch()"> 🌐 Web Search
+          </label>
         </div>
         <div class="input-row">
-          <textarea id="chatInput" placeholder="Ask about any topic, formula, concept..." rows="1" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+          <textarea id="chatInput" placeholder="Ask anything... (enable Web Search for current events)" rows="1" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
           <button class="send-btn" id="sendBtn" onclick="sendMessage()">➤</button>
         </div>
       </div>
     </div>
   </div>
-  <div class="view" id="view-flashcards" style="margin-top:1.25rem;">
+  <div class="view" id="view-upload">
+    <div class="upload-grid">
+      <div class="upload-card">
+        <h3>📸 Photo / Image <span class="badge new">NEW</span></h3>
+        <p style="font-size:0.78rem;color:var(--muted)">Upload a photo of your notes, textbook page, or whiteboard</p>
+        <div class="upload-zone" onclick="document.getElementById('photoInput').click()">
+          <input type="file" id="photoInput" accept="image/*" onchange="handlePhotoUpload(event)">
+          <div id="photoPreview">📷 Click to upload photo<br/><span style="font-size:0.7rem">JPG, PNG, WEBP supported</span></div>
+        </div>
+        <div class="action-row">
+          <button class="process-btn" id="photoSumBtn" onclick="processPhoto('summary')" disabled>Summarize</button>
+          <button class="process-btn" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);" id="photoNoteBtn" onclick="processPhoto('notes')" disabled>Get Notes</button>
+        </div>
+        <div id="photoResult" style="display:none" class="result-box"></div>
+      </div>
+      <div class="upload-card">
+        <h3>📄 PDF Document <span class="badge new">NEW</span></h3>
+        <p style="font-size:0.78rem;color:var(--muted)">Upload a PDF to get instant summaries and study notes</p>
+        <div class="upload-zone" onclick="document.getElementById('pdfInput').click()">
+          <input type="file" id="pdfInput" accept=".pdf" onchange="handlePDFUpload(event)">
+          <div id="pdfPreview">📄 Click to upload PDF<br/><span style="font-size:0.7rem">PDF files only</span></div>
+        </div>
+        <div class="action-row">
+          <button class="process-btn" id="pdfSumBtn" onclick="processPDF('summary')" disabled>Summarize</button>
+          <button class="process-btn" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);" id="pdfNoteBtn" onclick="processPDF('notes')" disabled>Key Points</button>
+          <button class="process-btn" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);" id="pdfQBtn" onclick="processPDF('questions')" disabled>Study Qs</button>
+        </div>
+        <div id="pdfResult" style="display:none" class="result-box"></div>
+      </div>
+    </div>
+  </div>
+  <div class="view" id="view-video">
+    <div class="video-area">
+      <div class="upload-card">
+        <h3>🎥 YouTube Lecture Notes <span class="badge new">NEW</span></h3>
+        <p style="font-size:0.78rem;color:var(--muted)">Paste any YouTube video link and get AI-generated notes</p>
+        <div class="video-input-row">
+          <input class="video-input" id="videoUrl" placeholder="Paste YouTube URL here... e.g. https://youtube.com/watch?v=..." />
+          <button class="video-btn" id="videoBtn" onclick="processVideo()">Get Notes</button>
+        </div>
+        <div class="video-options">
+          <button class="opt-btn active" id="opt-summary" onclick="selectOpt('summary')">📝 Summary</button>
+          <button class="opt-btn" id="opt-notes" onclick="selectOpt('notes')">📒 Detailed Notes</button>
+          <button class="opt-btn" id="opt-questions" onclick="selectOpt('questions')">❓ Study Questions</button>
+          <button class="opt-btn" id="opt-flashcards" onclick="selectOpt('flashcards')">🃏 Flashcards</button>
+        </div>
+        <div id="videoResult" class="result-box" style="display:none"></div>
+      </div>
+    </div>
+  </div>
+  <div class="view" id="view-flashcards">
     <div class="flashcard-area">
       <div class="fc-generate">
-        <input class="fc-input" id="fcTopic" placeholder="Enter a topic (e.g. Cell Biology, French Revolution...)" />
-        <button class="fc-btn" id="fcBtn" onclick="generateFlashcards()">Generate Cards</button>
+        <input class="fc-input" id="fcTopic" placeholder="Enter topic (e.g. Cell Biology, French Revolution...)" />
+        <button class="fc-btn" id="fcBtn" onclick="generateFlashcards()">Generate</button>
       </div>
       <div id="card-deck" class="card-deck"></div>
     </div>
   </div>
-  <div class="view" id="view-summarize" style="margin-top:1.25rem;">
+  <div class="view" id="view-summarize">
     <div class="summary-area">
       <div class="summary-box">
         <div class="summary-label">Paste your notes or text</div>
-        <textarea class="summary-input" id="summaryInput" placeholder="Paste lecture notes, a textbook paragraph, an article..."></textarea>
+        <textarea class="summary-input" id="summaryInput" placeholder="Paste lecture notes, textbook paragraph, article..."></textarea>
         <div class="action-row">
           <button class="action-btn primary" onclick="summarize('summary')" id="sumBtn">Summarize</button>
           <button class="action-btn" onclick="summarize('bullets')" id="bulBtn">Key Points</button>
           <button class="action-btn" onclick="summarize('questions')" id="qsBtn">Study Qs</button>
-          <button class="action-btn" onclick="summarize('explain')" id="expBtn">Explain Simply</button>
+          <button class="action-btn" onclick="summarize('explain')" id="expBtn">Simplify</button>
         </div>
       </div>
       <div id="summaryResult" style="display:none" class="summary-box">
@@ -191,42 +269,49 @@
       </div>
     </div>
   </div>
-  <div class="view" id="view-tools" style="margin-top:1.25rem;">
+  <div class="view" id="view-tools">
     <div class="tools-grid">
-      <div class="tool-card" onclick="switchToChat('Create a detailed 2-week study plan for exams covering multiple subjects')"><div class="tool-icon">📅</div><div class="tool-title">Study Planner</div><div class="tool-desc">Personalized schedule for your exams</div></div>
-      <div class="tool-card" onclick="switchToChat('Give me 5 powerful memory techniques and mnemonics for studying')"><div class="tool-icon">🧠</div><div class="tool-title">Memory Tricks</div><div class="tool-desc">Mnemonics and memory techniques</div></div>
-      <div class="tool-card" onclick="switchToChat('Help me solve quadratic equations step by step with examples')"><div class="tool-icon">🔢</div><div class="tool-title">Math Solver</div><div class="tool-desc">Step-by-step solutions with explanations</div></div>
-      <div class="tool-card" onclick="switchToChat('Help me write a well-structured essay outline on a topic')"><div class="tool-icon">✍️</div><div class="tool-title">Essay Helper</div><div class="tool-desc">Thesis, outlines, arguments & structure</div></div>
-      <div class="tool-card" onclick="switchToChat('Create a mind map structure for: Human Digestive System')"><div class="tool-icon">🗺️</div><div class="tool-title">Mind Maps</div><div class="tool-desc">Visual concept organization</div></div>
-      <div class="tool-card" onclick="switchToChat('Help me with debate preparation — give arguments for and against a topic')"><div class="tool-icon">⚖️</div><div class="tool-title">Debate Coach</div><div class="tool-desc">Arguments, counterpoints, practice</div></div>
+      <div class="tool-card" onclick="switchToChat('Create a detailed 2-week study plan for exams')"><div class="tool-icon">📅</div><div class="tool-title">Study Planner</div><div class="tool-desc">Personalized exam schedule</div></div>
+      <div class="tool-card" onclick="switchToChat('Give me 5 powerful memory techniques and mnemonics')"><div class="tool-icon">🧠</div><div class="tool-title">Memory Tricks</div><div class="tool-desc">Mnemonics and techniques</div></div>
+      <div class="tool-card" onclick="switchToChat('Help me solve quadratic equations step by step')"><div class="tool-icon">🔢</div><div class="tool-title">Math Solver</div><div class="tool-desc">Step-by-step solutions</div></div>
+      <div class="tool-card" onclick="switchToChat('Help me write a well-structured essay outline')"><div class="tool-icon">✍️</div><div class="tool-title">Essay Helper</div><div class="tool-desc">Thesis, outlines, arguments</div></div>
+      <div class="tool-card" onclick="switchToChat('Create a mind map for: Human Digestive System')"><div class="tool-icon">🗺️</div><div class="tool-title">Mind Maps</div><div class="tool-desc">Visual concept organization</div></div>
+      <div class="tool-card" onclick="switchToChat('Help me prepare for a debate with arguments for and against')"><div class="tool-icon">⚖️</div><div class="tool-title">Debate Coach</div><div class="tool-desc">Arguments and counterpoints</div></div>
+      <div class="tool-card" onclick="switchView('upload')"><div class="tool-icon">📸</div><div class="tool-title">Photo Notes</div><div class="tool-desc">Upload photo → get notes</div></div>
+      <div class="tool-card" onclick="switchView('video')"><div class="tool-icon">🎥</div><div class="tool-title">Video Notes</div><div class="tool-desc">YouTube → study notes</div></div>
     </div>
   </div>
 </div>
 <script>
   const WORKER_URL = "https://studyai-api.vedantbir1831.workers.dev";
-  let currentMode = 'ask', isLoading = false, qCount = 0, fcCount = 0, sCount = 0;
+  let currentMode = 'ask', isLoading = false;
+  let qCount = 0, fcCount = 0, sCount = 0, vCount = 0;
+  let webSearchOn = false, videoOpt = 'summary';
+  let photoBase64 = null, pdfText = null;
   const chatHistory = [];
   const modePrompts = {
-    ask: "You are StudyAI, a helpful academic tutor. Answer clearly. Use bold for key terms.",
-    quiz: "You are StudyAI in quiz mode. Create questions, wait for answers, then give feedback.",
-    explain: "You are StudyAI. Explain concepts simply, like teaching a 12-year-old. Use analogies.",
-    solve: "You are StudyAI. Break down solutions step by step. Number each step. Show all working.",
-    debate: "You are StudyAI helping with debate. Provide strong arguments and counterarguments."
+    ask: "You are StudyAI, a helpful academic tutor. Answer clearly with examples. Use **bold** for key terms.",
+    quiz: "You are StudyAI in quiz mode. Ask questions one at a time, wait for answers, then give feedback.",
+    explain: "You are StudyAI. Explain in extremely simple terms like teaching a 12-year-old. Use analogies.",
+    solve: "You are StudyAI. Solve step by step, number each step, show all working, explain why.",
+    debate: "You are StudyAI helping with debate. Give strong arguments and counterarguments for both sides."
   };
-  async function callAI(messages, system) {
-    const res = await fetch(WORKER_URL, { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,system:system||modePrompts.ask,messages}) });
+  async function callAI(messages, system, useSearch, searchQuery) {
+    const res = await fetch(WORKER_URL, { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({messages, system, useSearch:useSearch||false, searchQuery:searchQuery||""}) });
     const data = await res.json();
-    return data.content?.map(b=>b.text||"").join("") || "Error getting response.";
+    return data.content?.[0]?.text || "Error getting response.";
   }
-  function switchView(v) { document.querySelectorAll('.view').forEach(el=>el.classList.remove('active')); document.getElementById('view-'+v).classList.add('active'); document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',['chat','flashcards','summarize','tools'][i]===v)); }
+  function switchView(v) { document.querySelectorAll('.view').forEach(el=>el.classList.remove('active')); document.getElementById('view-'+v).classList.add('active'); document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',['chat','upload','video','flashcards','summarize','tools'][i]===v)); }
   function switchToChat(prompt) { switchView('chat'); document.getElementById('chatInput').value=prompt; sendMessage(); }
   function setMode(m) { const map={tutor:'ask',quiz:'quiz',explain:'explain',debate:'debate',research:'ask'}; selectChip(map[m]||'ask'); switchView('chat'); }
   function selectChip(mode) { currentMode=mode; document.querySelectorAll('.mode-chip').forEach(c=>c.classList.remove('active')); document.getElementById('chip-'+mode)?.classList.add('active'); }
+  function toggleSearch() { webSearchOn=document.getElementById('webSearch').checked; document.getElementById('searchToggle').classList.toggle('on',webSearchOn); }
   function handleKey(e) { if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage();} }
   function autoResize(el) { el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,120)+'px'; }
-  function quickPrompt(text) { document.getElementById('chatInput').value=text; sendMessage(); }
+  function quickPrompt(text,search) { if(search){document.getElementById('webSearch').checked=true;webSearchOn=true;document.getElementById('searchToggle').classList.add('on');} document.getElementById('chatInput').value=text; sendMessage(); }
+  function selectOpt(o) { videoOpt=o; document.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('active')); document.getElementById('opt-'+o)?.classList.add('active'); }
   function appendMsg(role,text) { const msgs=document.getElementById('messages'); const div=document.createElement('div'); div.className='msg '+role; div.innerHTML=`<div class="avatar ${role}">${role==='ai'?'AI':'You'}</div><div class="bubble">${formatText(text)}</div>`; msgs.appendChild(div); msgs.scrollTop=msgs.scrollHeight; }
-  function formatText(text) { return text.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/```([\s\S]*?)```/g,'<pre>$1</pre>').replace(/`(.*?)`/g,'<code style="background:rgba(0,0,0,0.3);padding:1px 5px;border-radius:4px;font-family:var(--mono);font-size:0.85em">$1</code>').replace(/\n/g,'<br/>'); }
+  function formatText(t) { return t.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/```([\s\S]*?)```/g,'<pre>$1</pre>').replace(/`(.*?)`/g,'<code style="background:rgba(0,0,0,0.3);padding:1px 5px;border-radius:4px;font-family:var(--mono);font-size:0.85em">$1</code>').replace(/\n/g,'<br/>'); }
   function showTyping() { const msgs=document.getElementById('messages'); const div=document.createElement('div'); div.className='msg ai'; div.id='typing'; div.innerHTML='<div class="avatar ai">AI</div><div class="bubble"><div class="typing-indicator"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>'; msgs.appendChild(div); msgs.scrollTop=msgs.scrollHeight; }
   function removeTyping() { document.getElementById('typing')?.remove(); }
   async function sendMessage() {
@@ -234,25 +319,66 @@
     const inp=document.getElementById('chatInput'); const text=inp.value.trim(); if(!text) return;
     inp.value=''; inp.style.height='auto'; isLoading=true; document.getElementById('sendBtn').disabled=true;
     appendMsg('user',text); chatHistory.push({role:'user',content:text}); showTyping(); qCount++; document.getElementById('q-count').textContent=qCount;
-    try { const reply=await callAI(chatHistory,modePrompts[currentMode]); chatHistory.push({role:'assistant',content:reply}); removeTyping(); appendMsg('ai',reply); }
-    catch(e) { removeTyping(); appendMsg('ai','⚠️ Could not connect. Check your Worker URL.'); }
+    try { const reply=await callAI(chatHistory,modePrompts[currentMode],webSearchOn,text); chatHistory.push({role:'assistant',content:reply}); removeTyping(); appendMsg('ai',reply); }
+    catch(e) { removeTyping(); appendMsg('ai','⚠️ Could not connect. Please try again.'); }
     isLoading=false; document.getElementById('sendBtn').disabled=false;
+  }
+  function handlePhotoUpload(e) {
+    const file=e.target.files[0]; if(!file) return;
+    const reader=new FileReader();
+    reader.onload=()=>{ photoBase64=reader.result.split(',')[1]; document.getElementById('photoPreview').innerHTML='✅ '+file.name+'<br/><span style="font-size:0.7rem;color:var(--accent3)">Ready to process</span>'; document.getElementById('photoSumBtn').disabled=false; document.getElementById('photoNoteBtn').disabled=false; };
+    reader.readAsDataURL(file);
+  }
+  async function processPhoto(type) {
+    if(!photoBase64) return;
+    const btn=document.getElementById(type==='summary'?'photoSumBtn':'photoNoteBtn'); btn.innerHTML='<span class="spinner"></span>'; btn.disabled=true;
+    const resultEl=document.getElementById('photoResult'); resultEl.style.display='block'; resultEl.textContent='Analyzing image...';
+    const prompts={summary:'This is an image of study material. Provide a clear summary.',notes:'This is an image of study material. Extract key information into study notes with bullet points.'};
+    try { const reply=await callAI([{role:'user',content:prompts[type]}],'You are StudyAI, expert at analyzing educational content.'); resultEl.textContent=reply; sCount++; document.getElementById('s-count').textContent=sCount; }
+    catch(e) { resultEl.textContent='Error processing image.'; }
+    btn.innerHTML=type==='summary'?'Summarize':'Get Notes'; btn.disabled=false;
+  }
+  function handlePDFUpload(e) {
+    const file=e.target.files[0]; if(!file) return;
+    const reader=new FileReader();
+    reader.onload=()=>{ pdfText="PDF: "+file.name+" ("+Math.round(file.size/1024)+"KB)"; document.getElementById('pdfPreview').innerHTML='✅ '+file.name+'<br/><span style="font-size:0.7rem;color:var(--accent3)">Ready to process</span>'; document.getElementById('pdfSumBtn').disabled=false; document.getElementById('pdfNoteBtn').disabled=false; document.getElementById('pdfQBtn').disabled=false; };
+    reader.readAsArrayBuffer(file);
+  }
+  async function processPDF(type) {
+    if(!pdfText) return;
+    const btnMap={summary:'pdfSumBtn',notes:'pdfNoteBtn',questions:'pdfQBtn'};
+    const btn=document.getElementById(btnMap[type]); const origText=btn.textContent; btn.innerHTML='<span class="spinner"></span>'; btn.disabled=true;
+    const resultEl=document.getElementById('pdfResult'); resultEl.style.display='block'; resultEl.textContent='Processing PDF...';
+    const prompts={summary:'Create a comprehensive summary: ',notes:'Extract key information into study notes: ',questions:'Generate 8 study questions: '};
+    try { const reply=await callAI([{role:'user',content:prompts[type]+pdfText}],'You are StudyAI, expert at analyzing educational documents.'); resultEl.textContent=reply; sCount++; document.getElementById('s-count').textContent=sCount; }
+    catch(e) { resultEl.textContent='Error processing PDF.'; }
+    btn.innerHTML=origText; btn.disabled=false;
+  }
+  async function processVideo() {
+    const url=document.getElementById('videoUrl').value.trim(); if(!url) return;
+    const btn=document.getElementById('videoBtn'); btn.innerHTML='<span class="spinner"></span>'; btn.disabled=true;
+    const resultEl=document.getElementById('videoResult'); resultEl.style.display='block'; resultEl.textContent='Analyzing video...';
+    const videoId=url.match(/(?:v=|youtu\.be\/)([^&\n?#]+)/)?.[1]||'';
+    const optPrompts={summary:'Give a comprehensive summary with main topics',notes:'Create detailed study notes with key concepts',questions:'Generate 10 study questions',flashcards:'Create 8 flashcard pairs as Q: question | A: answer'};
+    try { const reply=await callAI([{role:'user',content:`YouTube video ID: ${videoId}, URL: ${url}. ${optPrompts[videoOpt]}.`}],'You are StudyAI, expert at creating study materials from video lectures.',true,'YouTube video '+url); resultEl.textContent=reply; vCount++; document.getElementById('v-count').textContent=vCount; }
+    catch(e) { resultEl.textContent='Error processing video.'; }
+    btn.innerHTML='Get Notes'; btn.disabled=false;
   }
   async function generateFlashcards() {
     const topic=document.getElementById('fcTopic').value.trim(); if(!topic) return;
     const btn=document.getElementById('fcBtn'); btn.disabled=true; btn.innerHTML='<span class="spinner"></span>';
     document.getElementById('card-deck').innerHTML='<div style="color:var(--muted);text-align:center;padding:1.5rem;font-size:0.85rem">Generating flashcards...</div>';
-    try { const reply=await callAI([{role:'user',content:`Generate exactly 6 flashcards for: "${topic}". Return ONLY a JSON array, no markdown. Format: [{"q":"question","a":"answer"}]. Concise answers (1-2 sentences).`}]); const clean=reply.replace(/```json|```/g,'').trim(); const cards=JSON.parse(clean); const deck=document.getElementById('card-deck'); deck.innerHTML=''; cards.forEach((c,i)=>{ const div=document.createElement('div'); div.className='flashcard'; div.innerHTML=`<div class="fc-q">${i+1}. ${c.q}</div><div class="fc-hint" style="margin-top:4px;font-size:0.72rem;color:var(--muted)">Click to reveal answer</div><div class="fc-a">${c.a}</div>`; div.onclick=()=>{ div.classList.toggle('flipped'); div.querySelector('.fc-hint').style.display=div.classList.contains('flipped')?'none':'block'; }; deck.appendChild(div); }); fcCount+=cards.length; document.getElementById('fc-count').textContent=fcCount; }
-    catch(e) { document.getElementById('card-deck').innerHTML='<div style="color:var(--danger);text-align:center;padding:1rem;font-size:0.85rem">Failed to generate.</div>'; }
-    btn.disabled=false; btn.textContent='Generate Cards';
+    try { const reply=await callAI([{role:'user',content:`Generate exactly 8 flashcards for: "${topic}". Return ONLY a JSON array. Format: [{"q":"question","a":"answer"}].`}]); const cards=JSON.parse(reply.replace(/```json|```/g,'').trim()); const deck=document.getElementById('card-deck'); deck.innerHTML=''; cards.forEach((c,i)=>{ const div=document.createElement('div'); div.className='flashcard'; div.innerHTML=`<div class="fc-q">${i+1}. ${c.q}</div><div class="fc-hint">Click to reveal</div><div class="fc-a">${c.a}</div>`; div.onclick=()=>{ div.classList.toggle('flipped'); div.querySelector('.fc-hint').style.display=div.classList.contains('flipped')?'none':'block'; }; deck.appendChild(div); }); fcCount+=cards.length; document.getElementById('fc-count').textContent=fcCount; }
+    catch(e) { document.getElementById('card-deck').innerHTML='<div style="color:var(--danger);text-align:center;padding:1rem">Failed. Try again.</div>'; }
+    btn.disabled=false; btn.textContent='Generate';
   }
   async function summarize(type) {
     const text=document.getElementById('summaryInput').value.trim(); if(!text) return;
-    const prompts={summary:'Summarize in 3-5 concise sentences:',bullets:'Extract 5-7 key points as bullet points (use •):',questions:'Generate 5 study questions from this text:',explain:'Explain the main concepts simply for a student:'};
+    const prompts={summary:'Summarize in 3-5 sentences:',bullets:'Extract 7 key points (use •):',questions:'Generate 6 study questions:',explain:'Explain simply for a student:'};
     ['sumBtn','bulBtn','qsBtn','expBtn'].forEach(id=>document.getElementById(id).disabled=true);
     const resultBox=document.getElementById('summaryResult'); const output=document.getElementById('summaryOutput'); resultBox.style.display='block'; output.textContent='Processing...';
     try { const reply=await callAI([{role:'user',content:prompts[type]+'\n\n'+text}]); output.textContent=reply; sCount++; document.getElementById('s-count').textContent=sCount; }
-    catch(e) { output.textContent='Error connecting.'; }
+    catch(e) { output.textContent='Error. Try again.'; }
     ['sumBtn','bulBtn','qsBtn','expBtn'].forEach(id=>document.getElementById(id).disabled=false);
   }
 </script>
